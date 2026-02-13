@@ -67,10 +67,11 @@
 
         .no {
             background: white;
-            border: 2px solid #ff4d4d;
+            border: 1.5px solid #ff4d4d;
             color: #ff4d4d;
             position: absolute;
             z-index: 10;
+            border-radius: 10px;
         }
 
         /* ================================================== */
@@ -81,9 +82,9 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
             background: white;
-            padding: 40px 60px;
-            border-radius: 20px;
-            font-size: clamp(22px, 5vw, 50px);
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: clamp(10px, 3vw, 20px);
             font-weight: 800;
             color: #ff3b3b;
             box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
@@ -93,6 +94,7 @@
         }
 
         .showError {
+            font-size: 5px;
             animation: pop .4s forwards, shake .4s .4s, blink 1s infinite alternate;
         }
 
@@ -179,48 +181,64 @@
     <!-- INTRO -->
     <section id="intro">
         <h1 id="typewriter"></h1>
+
+        <!-- SARINAY ROA -->
+        <div
+            style="display:flex; gap:20px; justify-content:center; align-items:center; margin-bottom:20px; flex-wrap:wrap;">
+            <img src="Messenger_creation_24511AC6-3C73-4A03-AD86-E061DB4B5FDD.jpeg" alt="Sary anao"
+                style="width:150px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,.3);">
+            <img src="./IMG-20260212-WA0010.jpg" alt="Sary ny sipanao"
+                style="width:150px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,.3);">
+        </div>
+
+        <!-- MUSIC -->
+        <audio id="romanticMusic" autoplay loop>
+            <source src="music-romantique.mp3" type="audio/mp3">
+        </audio>
+
         <button class="yes" onclick="nextSection('q1')">Commencer ❤️</button>
     </section>
 
+
     <!-- QUESTION 1 -->
     <section id="q1">
-        <h1>Te ho valentine-ko ve ianao androany 14 Février ? ❤️</h1>
+        <h1>Tsy manino ve raha tsy manana cadeau St-valentin ho anao ramose fa ity no misy🥹❤️?</h1>
         <div style="position:relative;height:100px;width:100%;max-width:400px;">
             <button class="yes" onclick="nextSection('q2')">OUI 😍</button>
-            <button class="no" id="no1">NON 😏</button>
+            <button class="no" id="no1" onclick="showError()">NON 😏</button>
         </div>
     </section>
 
     <!-- QUESTION 2 -->
     <section id="q2">
-        <h1>Iza no olona tena tianao? 😏</h1>
+        <h1>Iza amin'ireto no olona tena tian'i Toloja? 😏</h1>
         <div class="flex flex-col gap-4 mt-4">
-            <button class="yes" onclick="nextSection('q3')">Moi ❤️</button>
-            <button class="yes" onclick="showError()">Rakoto 😜</button>
-            <button class="yes" onclick="showError()">Hafa 😆</button>
+            <button class="yes" onclick="nextSection('q3')">Tsi Tsi ❤️</button>
+            <button class="yes" onclick="showErrorNosyRose()">NOSY ROSE 🎤</button>
+            <button class="yes" onclick="showErrorWC()">Wendy Cathalina 🚽🛁</button>
         </div>
     </section>
 
     <!-- QUESTION 3 -->
     <section id="q3">
-        <h1>Vonona hanambady ahy ve ianao indray andro any? 💍</h1>
+        <h1>Fa ianao ve aloha tena tia ahy marina euh? 😏</h1>
         <div style="position:relative;height:100px;width:100%;max-width:400px;">
-            <button class="yes" onclick="nextSection('final')">ENY MAZAVA ❤️</button>
-            <button class="no" id="no2">TSIA KELY 😜</button>
+            <button class="yes" onclick="nextSection('final')">OUI 💗</button>
+            <button class="no" id="no2">TSY AIKO😜</button>
         </div>
     </section>
 
     <!-- FINAL -->
     <section id="final">
-        <h1>Tiako ianao mihoatra noho ny teny rehetra ❤️</h1>
+        <h1>Faly be aho 😂 <br>Aiko fa OUI valinteninao 😍</h1>
         <div class="counter" id="counter"></div>
-        <button class="yes mt-6" onclick="location.reload()">Hiverina any am-boalohany</button>
+        <button class="yes mt-6" onclick="nextSection('intro')">Hanao choix hafa</button>
     </section>
 
     <script>
         /* ================================================== */
         /* TYPEWRITER */
-        const text = "Misy zavatra manokana ho anao androany... ❤️";
+        const text = "Misy zavatra manokana ho anao androany...😉❤️";
         let i = 0;
         function typeWriter() {
             if (i < text.length) {
@@ -242,16 +260,45 @@
         /* ================================================== */
         /* ERROR RANDOM */
         const funnyTexts = [
-            "❌ DISO ZANY 😂",
-            "❌ Tsy mety izany 😜",
-            "❌ Moi ihany no valiny 😎",
-            "❌ Aza manao drama 😆",
+            "❌ Antay, tsisy hoe 💩😂",
+            "❌ Diso safidy ianao 😆",
+            "❌ Aaaaaaaa 😑 ",
             "❌ OUI IHANY 😌",
-            "❌ Tsy ekena izany tsia izany 😝"
+            "❌ Tsy maintsy OUI ka 🥱"
         ];
         function showError() {
             const box = document.getElementById("errorBox");
             box.innerHTML = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+            box.classList.add("showError");
+            setTimeout(() => {
+                box.classList.remove("showError");
+                box.style.transform = "translate(-50%,-50%) scale(0)";
+            }, 1500);
+        }
+        const funnyTextsNosyRose = [
+            "❌ Dylan zao sipaniny 🦾😂",
+            "❌ Tia micro be iny 🎤😜",
+            "❌ Ataony Atonich man*man amizany 😌",
+            "❌ Aaaaaa 😑",
+        ];
+        function showErrorNosyRose() {
+            const box = document.getElementById("errorBox");
+            box.innerHTML = funnyTextsNosyRose[Math.floor(Math.random() * funnyTextsNosyRose.length)];
+            box.classList.add("showError");
+            setTimeout(() => {
+                box.classList.remove("showError");
+                box.style.transform = "translate(-50%,-50%) scale(0)";
+            }, 1500);
+        }
+        const funnyTextsWC = [
+            "❌ Tsy manana WhatsApp iresahana aminy aho 😂",
+            "❌ Tia appel video be iny 🎥😜",
+            "❌ Tsy te ahita video otrany Ckicky aho 🔇😌",
+            "❌ Tsy tia sipa makany WC ela be aho 🚽😑",
+        ];
+        function showErrorWC() {
+            const box = document.getElementById("errorBox");
+            box.innerHTML = funnyTextsWC[Math.floor(Math.random() * funnyTextsWC.length)];
             box.classList.add("showError");
             setTimeout(() => {
                 box.classList.remove("showError");
@@ -314,11 +361,14 @@
             const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const m = Math.floor((diff / 1000 / 60) % 60);
             const s = Math.floor((diff / 1000) % 60);
-            counter.innerHTML = "Isika niaraka hatramin'ny 02 Novembre 2023 ❤️<br>" + d + " andro " + h + " ora " + m + " minitra " + s + " segondra";
+            counter.innerHTML = "Tadidinao ve 📆 02 Novembre 2023 🥹❤️<br><br>" + d + " jours " + h + " h: " + m + " min: " + s + " sec androany ilay izy <br><br> 🥂🎉 JOYUESE ST-VALENTIN <strong>MON LEADER PRICE 🥰🎉</strong> ";
         }
         setInterval(updateCounter, 1000);
         updateCounter();
+
     </script>
+
+    
 
 </body>
 
